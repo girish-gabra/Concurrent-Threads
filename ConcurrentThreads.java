@@ -7,12 +7,15 @@ public class ConcurrentThreads implements Runnable {
 	{
 		while(true)
 		{
-			if(count<100){
-				count++;
-				System.out.println(count);
-			}else{
-				break;
-			}
+			/* synchronized block to ensure only one thread at a time executes the following statements*/	
+			synchronized(this){
+				if(count<100){
+					count++;
+					System.out.println(count);
+				}else{
+					break;
+				}
+			}	
 		}
 	}
 
