@@ -6,8 +6,8 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 public class ConcurrentThreads implements Runnable {
-	static int count=0;
-	final CyclicBarrier gate = new CyclicBarrier(3);
+	static int count=0;			// global counter
+	final CyclicBarrier gate = new CyclicBarrier(3);	// 3 as we have 3 threads
 	
 	public void run()
 	{
@@ -25,6 +25,7 @@ public class ConcurrentThreads implements Runnable {
 						collection.add(count);
 						System.out.println(count);
 					}else{
+						/* display the collection of elements by this thread*/
 						display(collection);
 						break;
 					}
