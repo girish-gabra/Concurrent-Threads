@@ -7,10 +7,15 @@ import java.util.concurrent.CyclicBarrier;
 
 public class ConcurrentThreads implements Runnable {
 	static int count=0;
+	final CyclicBarrier gate = new CyclicBarrier(3);
 	
 	public void run()
 	{
-		List<Integer> collection=new ArrayList<Integer>();
+		try 
+		{
+			gate.await();
+			List<Integer> collection=new ArrayList<Integer>();
+	
 			while(true)
 			{
 				/* synchronized block to ensure only one thread at a time executes the following statements*/	
@@ -25,8 +30,16 @@ public class ConcurrentThreads implements Runnable {
 					}
 				}	
 			}
-		
-	}
+		}catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BrokenBarrierException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	 }
 	
 	public void display(List<Integer> collection)
 	{
